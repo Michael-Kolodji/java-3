@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
-	<classpathentry kind="lib" path="C:/Users/michael.kolodji/codenation/java-3/lib/junit-4.13-beta-1.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.13-beta-1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

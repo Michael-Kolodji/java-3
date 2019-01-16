@@ -44,8 +44,24 @@ public class Jogador {
 		return club;
 	}
 	
+	public Integer getAge() {
+		return age;
+	}
+	
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+	
 	public String getNationality() {
 		return nationality;
+	}
+	
+	public BigDecimal getEurWage() {
+		return eurWage;
+	}
+	
+	public BigDecimal getEurReleaseClause() {
+		return eurReleaseClause;
 	}
 	
 	@Override
