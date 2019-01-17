@@ -5,11 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +62,7 @@ public class Main {
 										.sorted(Comparator.comparing(Jogador::getEurReleaseClause))
 										.map(Jogador::getFullName);
 										
-		return richs.collect(Collectors.toList());
+		return richs.limit(10).collect(Collectors.toList());
 	}
 
 	// Quem são os 10 jogadores mais velhos (use como critério de desempate o
@@ -128,8 +125,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-//		System.out.println(new Main().q2());
-		new Main().q6().forEach((k, v) -> System.out.println("[Key: " + k + " Value: " + v + "]"));
+		System.out.println(new Main().q1());
+		//new Main().q4();//.forEach((k, v) -> System.out.println("[Key: " + k + " Value: " + v + "]"));
 
 	}
 
