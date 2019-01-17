@@ -35,11 +35,11 @@ public class Main {
 	// Quantos clubes (coluna `club`) diferentes existem no arquivo?
 	// Obs: Existem jogadores sem clube.
 	public int q2() {
-		List<String> clubs = new ArrayList<String>();
+		Map<String, String> clubs = new HashMap<String, String>();
 
 		fifaList.forEach(jogador -> {
-			if (!clubs.contains(jogador.getClub()) && !jogador.getClub().equals(null)) {
-				clubs.add(jogador.getClub());
+			if (!jogador.getClub().equals("")) {
+					clubs.put(jogador.getClub(), jogador.getClub());
 			}
 		});
 
@@ -49,32 +49,30 @@ public class Main {
 	// Liste o primeiro nome (coluna `full_name`) dos 20 primeiros jogadores.
 	public List<String> q3() {
 		return fifaList.stream().limit(20)
-				.map(jogador -> jogador.getFullName().substring(0, jogador.getFullName().indexOf(" ")))
+				.map(jogador -> jogador.getFullName())
 				.collect(Collectors.toList());
 	}
 
-	/****************/
 	// Quem são os top 10 jogadores que possuem as maiores cláusulas de rescisão?
 	// (utilize as colunas `full_name` e `eur_release_clause`)
 	public List<String> q4() {
-		Stream<String> richs = fifaList.stream()
-										.filter(jogador -> !jogador.getEurReleaseClause().equals(null))
-										.sorted(Comparator.comparing(Jogador::getEurReleaseClause))
-										.map(Jogador::getFullName);
-										
-		return richs.limit(10).collect(Collectors.toList());
+
+		List<String> jogadores = new ArrayList<String>();
+		fifaList.sort(Comparator.comparing(Jogador::getEurReleaseClause).reversed());
+
+		fifaList.subList(0, 10).forEach(jogador -> jogadores.add(jogador.getFullName()));
+		return jogadores;
 	}
 
 	// Quem são os 10 jogadores mais velhos (use como critério de desempate o
 	// campo `eur_wage`)?
 	// (utilize as colunas `full_name` e `birth_date`)
 	public List<String> q5() {
-		 Stream<String> old = fifaList.stream()
-					.sorted(Comparator.comparing(Jogador::getBirthDate)
-								.thenComparing(Comparator.comparing(Jogador::getEurWage)))
-					.map(Jogador::getFullName);
-		 
-		 return old.limit(10).collect(Collectors.toList());
+		Stream<String> old = fifaList.stream().sorted(
+				Comparator.comparing(Jogador::getBirthDate).thenComparing(Comparator.comparing(Jogador::getEurWage)))
+				.map(Jogador::getFullName);
+
+		return old.limit(10).collect(Collectors.toList());
 	}
 
 	// Conte quantos jogadores existem por idade. Para isso, construa um mapa onde
@@ -82,15 +80,15 @@ public class Main {
 	// (utilize a coluna `age`)
 	public Map<Integer, Integer> q6() {
 		Map<Integer, Integer> ages = new HashMap<>();
-		
+
 		fifaList.forEach(jogador -> {
-			if(!ages.containsKey(jogador.getAge())) {
+			if (!ages.containsKey(jogador.getAge())) {
 				ages.put(jogador.getAge(), 1);
 			} else {
 				ages.put(jogador.getAge(), ages.get(jogador.getAge()) + 1);
 			}
 		});
-		
+
 		return ages;
 	}
 
@@ -122,12 +120,6 @@ public class Main {
 		}
 
 		return list;
-	}
-
-	public static void main(String[] args) {
-		System.out.println(new Main().q1());
-		//new Main().q4();//.forEach((k, v) -> System.out.println("[Key: " + k + " Value: " + v + "]"));
-
 	}
 
 }
